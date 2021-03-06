@@ -1,0 +1,1 @@
+web: bokeh serve --port=$PORT --num-procs=0 --allow-websocket-origin=mk-boggle.herokuapp.com app.py
