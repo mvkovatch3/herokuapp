@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from functions import get_board
-from stack_solution import get_word_list
+from . import functions as funcs
+from . import stack_solution as ss
 
 from bokeh.io import curdoc
 from bokeh.layouts import column, row
@@ -144,11 +144,11 @@ def shuffle():
             letter_src.data["angle"],
             letter_src.data["x_off"],
             letter_src.data["y_off"],
-        ) = get_board(
+        ) = funcs.get_board(
             special=special_toggle.active
         )  # put angles in to get_board(angles=True/False)
     else:
-        new_letters, *_ = get_board(special=special_toggle.active)
+        new_letters, *_ = funcs.get_board(special=special_toggle.active)
         (
             letter_src.data["text"],
             letter_src.data["angle"],
@@ -163,7 +163,7 @@ def shuffle():
 
     # log # of words
     global words
-    words = get_word_list(letter_src.data["text"], min_length=4)
+    words = ss.get_word_list(letter_src.data["text"], min_length=4)
     with open("myapp/boggle_word_tallies.csv", "a+") as f:
         pd.Series(len(words)).to_csv(f, index=False, header=False)
 
